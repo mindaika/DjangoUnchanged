@@ -2,7 +2,10 @@ import math
 from decimal import Decimal, getcontext
 
 
+
 class Vector(object):
+    getcontext().prec=3
+
     def __init__(self, coordinates):
         try:
             if not coordinates:
@@ -29,26 +32,22 @@ class Vector(object):
         return Vector([x - y for x, y in zip(self.coordinates, other.coordinates)])
 
     def __mul__(self, c):
-        return Vector([c * x for x in self.coordinates])
+        return Vector([Decimal(c) * x for x in self.coordinates])
 
     def times_scalar(self, c):
         new_coordinates = [Decimal(c)*x for x in self.coordinates]
         return Vector(new_coordinates)
 
     def __round__(self, n=None):
-        round_list = []
-        for k in self.coordinates:
-            round_list.append(round(k, n))
-        return Vector(round_list)
+        return
 
     def magnitude(self):
-        coords_squared = [x**2 for x in self.coordinates]
-        return math.sqrt(sum(coords_squared))
+        coords_squared = [x**Decimal('2.0') for x in self.coordinates]
+        return Decimal(math.sqrt(sum(coords_squared)))
 
     def normalized(self):
         try:
-            magnitude = self.magnitude()
-            return self * (Decimal('1.0')/magnitude)
+            return self * (Decimal('1.0')/self.magnitude())
 
         except ZeroDivisionError:
             raise Exception('Cannot normalize the zero vector')
@@ -83,39 +82,39 @@ class Vector(object):
 
 
 print('\nLesson 2 - Section 4')
-vector4A = Vector((8.218, -9.341))
-vector4B = Vector((-1.129, 2.111))
-vector4C = Vector((7.119, 8.215))
-vector4D = Vector((-8.223, 0.878))
-vector4E = Vector((1.671, -1.012, -0.318))
-scalar4 = 7.41
+vector4A = Vector(('8.218', '-9.341'))
+vector4B = Vector(('-1.129', '2.111'))
+vector4C = Vector(('7.119', '8.215'))
+vector4D = Vector(('-8.223', '0.878'))
+vector4E = Vector(('1.671', '-1.012', '-0.318'))
+scalar4 = '7.41'
 
-print(round(vector4A + vector4B, 3))
-print(round(vector4C - vector4D, 3))
-print(round(vector4E * scalar4, 3))
+print(vector4A + vector4B)
+print(vector4C - vector4D)
+print(vector4E * scalar4)
 
 print('\nLesson 2 - Section 6')
-vector6A = Vector((-0.221, 7.437))
-vector6B = Vector((8.813, -1.331, -6.247))
-vector6C = Vector((5.581, -2.136))
-vector6D = Vector((1.996, 3.108, -4.554))
+vector6A = Vector(('-0.221', '7.437'))
+vector6B = Vector(('8.813', '-1.331', '-6.247'))
+vector6C = Vector(('5.581', '-2.136'))
+vector6D = Vector(('1.996', '3.108', '-4.554'))
 
-print(round(vector6A.magnitude(), 3))
-print(round(vector6B.magnitude(), 3))
-print(round(vector6C.normalized(), 3))
-print(round(vector6D.normalized(), 3))
+print(vector6A.magnitude())
+print(vector6B.magnitude())
+print(vector6C.normalized())
+print(vector6D.normalized())
 
 print('\nLesson 2 - Section 8')
-vector8A = (7.887, 4.138)
-vector8B = (-8.802, 6.776)
-vector8C = (-5.955, -4.904, -1.874)
-vector8D = (-4.496, -8.755, 7.103)
-vector8E = (3.183, -7.627)
-vector8F = (-2.668, 5.319)
-vector8G = (7.35, 0.221, 5.188)
-vector8H = (2.751, 8.259, 3.985)
-vector_test1 = Vector((2, 4))
-vector_test2 = Vector((1, 2))
+vector8A = Vector(('7.887', '4.138'))
+vector8B = Vector(('-8.802', '6.776'))
+vector8C = Vector(('-5.955', '-4.904', '-1.874'))
+vector8D = Vector(('-4.496', '-8.755', '7.103'))
+vector8E = Vector(('3.183', '-7.627'))
+vector8F = Vector(('-2.668', '5.319'))
+vector8G = Vector(('7.35', '0.221', '5.188'))
+vector8H = Vector(('2.751', '8.259', '3.985'))
+vector_test1 = Vector(('2', '4'))
+vector_test2 = Vector(('1', '2'))
 
 print(vector_test1.orthogonal(vector_test2))
 print(vector_test1.parallel(vector_test2))
