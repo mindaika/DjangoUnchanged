@@ -1,7 +1,25 @@
 from Vectoring import Vector
+from decimal import Decimal
+
+print('{} {}'.format('one', 'two'))
+
+def section13():
+
+    print('\nLesson 2 - Section 13')
+    v = Vector([8.462, 7.893, -8.187])
+    w = Vector([6.984, -5.975, 4.778])
+    print(v.cross_product(w))
+
+    v = Vector([-8.987, -9.838, 5.031])
+    w = Vector([-4.268, -1.861, -8.866])
+    print(v.area_of_parallelogram_with(w))
+
+    v = Vector([1.5, 9.547, 3.691])
+    w = Vector([-6.007, 0.124, 5.772])
+    print(v.area_of_parallelogram_with(w) * Decimal(0.5))
 
 
-def main():
+def section4():
 
     print('\nLesson 2 - Section 4')
     vector4A = Vector(['8.218', '-9.341'])
@@ -15,6 +33,9 @@ def main():
     print(vector4C.minus(vector4D))
     print(vector4E.times_scalar(scalar4))
 
+
+def section6():
+
     print('\nLesson 2 - Section 6')
     vector6A = Vector(['-0.221', '7.437'])
     vector6B = Vector(['8.813', '-1.331', '-6.247'])
@@ -26,6 +47,8 @@ def main():
     print(vector6C.normalized())
     print(vector6D.normalized())
 
+
+def section8():
     print('\nLesson 2 - Section 8')
     vector8A = Vector(['7.887', '4.138'])
     vector8B = Vector(['-8.802', '6.776'])
@@ -49,6 +72,7 @@ def main():
     # print(vector_test1.orthogonal(vector_test2))
     # print(vector_test1.parallel(vector_test2))
 
+def section10():
     print('\nLesson 2 - Section 10 : Checking for parallelism and orthogonality')
     vector10A = Vector(['-7.579', '-7.88'])
     vector10B = Vector(['22.737', '23.64'])
@@ -87,6 +111,8 @@ def main():
     if (vector10G.is_orthogonal_to(vector10H)):
         print('orthogonal\n')
 
+
+def section12():
     print('\nLesson 2 - Section 12 : Coding vector projections\n')
 
     v = Vector([3.039, 1.879])
@@ -102,4 +128,9 @@ def main():
 
     print('\nThe Whatevs is: ', v.component_parallel_to(b), ' + ', v.component_orthogonal_to(b))
 
-main()
+#section4()
+#section6()
+#section8()
+#section10()
+section12()
+#section13()

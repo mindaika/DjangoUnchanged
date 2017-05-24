@@ -1,6 +1,5 @@
 from math import sqrt, acos, pi
 from decimal import Decimal, getcontext
-getcontext().prec = 4
 
 
 class Vector(object):
@@ -8,12 +7,13 @@ class Vector(object):
     CANNOT_NORMALIZE_ZERO_VECTOR_MSG = 'Cannot normalize the zero vector'
     NO_UNIQUE_PARALLEL_COMPONENT_MSG = 'No unique parallel component exists for this vector'
     NO_UNIQUE_ORTHOGONAL_COMPONENT_MSG = 'No unique orthogonal component exists for this vector'
+    ONLY_DEFINED_IN_TWO_THREE_DIMS_MSG = 'Cross product only works in 3D'
 
     def __init__(self, coordinates):
         try:
             if not coordinates:
                 raise ValueError
-            self.coordinates = tuple([Decimal(x) for x in coordinates])
+            self.coordinates = tuple([Decimal(x).quantize(Decimal('.001')) for x in coordinates])
             self.dimension = len(coordinates)
 
         except ValueError:
@@ -116,3 +116,28 @@ class Vector(object):
                 raise Exception(self.NO_UNIQUE_PARALLEL_COMPONENT_MSG)
             else:
                 raise e
+
+    def cross_product(self, w):
+        try:
+            x1, y1, z1 = self.coordinates
+            x2, y2, z2 = w.coordinates
+            return Vector([y1 * z2 - y2 * z1,
+                           -(x1 * z2 - x2 * z1),
+                           x1 * y2 - x2 * y1])
+
+        except ValueError as e:
+            msg = str(e)
+            if msg == 'need more than 2 values to unpack':
+                self_embedded_in_R3 = Vector(self.coordinates + ('0',))
+                w_embedded_in_R3 = Vector(w.coordinates + ('0',))
+            elif (msg == 'too many values to unpack' or
+                  msg == 'need more than 1 value to unpack'):
+                raise Exception('self.ONLY_DEFINED_IN_TWO_THREE_DIMS_MSG')
+            else:
+                raise e
+
+    def area_of_parallelogram_with(self, w):
+        return self.cross_product(w).magnitude()
+
+    def area_of_triangle_with(self, w):
+        return self.area_of_parallelogram_with(w) / Decimal('2.0')
