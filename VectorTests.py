@@ -1,7 +1,6 @@
-from Vectoring import Vector
+from vector import Vector
 from decimal import Decimal
 
-print('{} {}'.format('one', 'two'))
 
 def section13():
 
@@ -84,31 +83,31 @@ def section10():
     vector10H = Vector(['0', '0'])
 
     print(vector10A, ' and\n', vector10B, ' are:')
-    if (vector10A.is_parallel_to(vector10B)):
+    if vector10A.is_parallel_to(vector10B):
         print('parallel\n')
 
-    if (vector10A.is_orthogonal_to(vector10B)):
+    if vector10A.is_orthogonal_to(vector10B):
         print('orthogonal\n')
 
     print(vector10C, ' and\n', vector10D, ' are:')
-    if (vector10C.is_parallel_to(vector10D)):
+    if vector10C.is_parallel_to(vector10D):
         print('parallel\n')
 
-    if (vector10C.is_orthogonal_to(vector10D)):
+    if vector10C.is_orthogonal_to(vector10D):
         print('orthogonal\n')
 
     print(vector10E, ' and\n', vector10F, ' are:')
-    if (vector10E.is_parallel_to(vector10F)):
+    if vector10E.is_parallel_to(vector10F):
         print('parallel\n')
 
-    if (vector10E.is_orthogonal_to(vector10F)):
+    if vector10E.is_orthogonal_to(vector10F):
         print('orthogonal\n')
 
     print(vector10G, ' and\n', vector10H, ' are:')
-    if (vector10G.is_parallel_to(vector10H)):
+    if vector10G.is_parallel_to(vector10H):
         print('parallel\n')
 
-    if (vector10G.is_orthogonal_to(vector10H)):
+    if vector10G.is_orthogonal_to(vector10H):
         print('orthogonal\n')
 
 
